@@ -1,0 +1,20 @@
+/* FullCalendar responsive toolbar for small screens */
+/* .fc-toolbar .fc-toolbar-chunk:first-child {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.fc-toolbar-title {
+  margin-left: auto;
+}
+
+@media (max-width: 600px) {
+  .fc-toolbar .fc-toolbar-chunk:last-child {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 4px;
+    width: 100%;
+  }
+} */

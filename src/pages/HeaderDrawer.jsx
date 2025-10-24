@@ -12,11 +12,13 @@ import {
   Radio,
   RadioGroup,
   Typography,
+  useTheme,
 } from "@mui/material";
 import { colors } from "../utils/constans";
 import { ThemeContext } from "../context/CustomThemeProvider";
 
 function HeaderDrawer() {
+  const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const { mode, setMode, primaryColor, setPrimaryColor } = useContext(ThemeContext);
 
@@ -36,7 +38,7 @@ function HeaderDrawer() {
 
   const DrawerList = (
     <Box sx={{ width: 280, p: 1, }} role="presentation">
-      <Box sx={{ width: 240, p: 2 }}>
+      <Box sx={{ width: 260, p: 2 }}>
         {/* Heading */}
         <Box
           sx={{
@@ -67,7 +69,7 @@ function HeaderDrawer() {
         </Box>
         <Divider sx={{ mb: 3 }} />
 
-        {/* Mode Selection */}
+        
         <FormControl component="fieldset" sx={{ mb: 2 }}>
           <FormLabel component="legend">Mode</FormLabel>
           <RadioGroup
@@ -80,7 +82,7 @@ function HeaderDrawer() {
           </RadioGroup>
         </FormControl>
 
-        {/* Color Palette */}
+        
         <Typography variant="subtitle1" color="gray" gutterBottom>
           Primary Color
         </Typography>
@@ -107,7 +109,7 @@ function HeaderDrawer() {
 
   return (
     <div>
-      {/* You can style this button to fit your header */}
+      
       <Button
         color="warning"
         onClick={toggleDrawer(true)}
@@ -119,7 +121,7 @@ function HeaderDrawer() {
           zIndex: open ? 1000 : 1400,
           borderRadius: "20% 0 0 20%",
           color: "#fff",
-          bgcolor: "#ff8c00",
+          bgcolor: theme.palette.primary.main,
           
           minWidth: "auto",
           p: 2,

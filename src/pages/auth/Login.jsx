@@ -13,8 +13,10 @@ import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { getItem } from "../../utils/localStorageUtils";
+import { useToast } from "../../hooks/useToast";
 
 function Login() {
+  const {showToast}= useToast()
   const navigate = useNavigate();
   const theme = useTheme();
   // Yup validation schema
@@ -56,7 +58,7 @@ function Login() {
       navigate("/dashboard");
       reset();
     } else {
-      alert("Invalid email or password");
+      showToast("Invalid email or password",'warning');
     }
   };
 

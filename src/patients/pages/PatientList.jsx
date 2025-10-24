@@ -27,7 +27,7 @@ import AddPatientModal from "../modals/AddPatientModal";
 
 function PatientList() {
 const theme = useTheme();
-     const navigate = useNavigate();
+const navigate = useNavigate();
 
   const [siteFilter, setSiteFilter] = useState("");
   const [statusFilter, setStatusFilter] = useState("");
@@ -82,7 +82,7 @@ const theme = useTheme();
         Cell: ({ row }) => (
           <Tooltip title="View Details">
             <IconButton
-            //   sx={tooltipIconTheme}
+            
               onClick={() => handleView(row.original)}
             >
               <VisibilityIcon />
@@ -119,12 +119,17 @@ const theme = useTheme();
 
   // Navigate to detail view
   const handleView = (patient) => {
-    navigate(`/patientDetails/${patient.id}`);
+    navigate(`/dashboard/patientDetails/${patient.id}`);
   };
   return (
     <>
-    <Box  sx={{   }}>
-   <Box  sx={{bgcolor:theme.palette.background.paper ,p:2,borderRadius: 2 ,mb:2}}>
+    <Box  sx={{bgcolor: theme.palette.background.paper,   }}>
+   <Box  sx={{
+            bgcolor: theme.palette.background.default,
+            p: 2,
+            borderRadius: 2,
+            mb: 3,
+          }}>
         {/* Header */}
         <Box
           display="flex"
@@ -179,7 +184,7 @@ const theme = useTheme();
    </Box>
 
       {/* Table */}
-     <Box sx={{ width: "100%",  overflowX: "auto" }}>
+     <Box sx={{ width: "100%",   }}>
   <MaterialReactTable table={table} />
 </Box>
     </Box>

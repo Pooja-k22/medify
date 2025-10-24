@@ -191,7 +191,7 @@ function ProfileModal({ openModal, handleCloseModal, setDataEditStatus }) {
               render={({ field }) => (
                 <FormControl fullWidth margin="normal" error={!!errors.role}  >
                   <InputLabel sx={
-                    {color:'var(--primary-color)'}
+                    {}
                   }>Role</InputLabel>
                   <Select {...field} label="Role" >
                     {roles?.map((item) => (

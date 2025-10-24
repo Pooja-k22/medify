@@ -49,6 +49,7 @@ export default function GeneralInfoCard({id}) {
           borderRadius: 3,
           mt: 3,
           boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
+           bgcolor: theme.palette.background.default,
         }}
       >
         <Box

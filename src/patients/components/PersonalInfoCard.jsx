@@ -41,9 +41,9 @@ setPatientData(currentPatient)
           p: 3,
           borderRadius: 3,
           mb: 3,
-         
+         bgcolor: theme.palette.background.default,
           boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
-          //color:"var(--text-color,black)"
+          
         }}
       >
         <Box

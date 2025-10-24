@@ -1,6 +1,7 @@
 import React from "react";
 import {
   Box,
+  IconButton,
   List,
   ListItemButton,
   ListItemIcon,
@@ -9,12 +10,15 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import MenuIcon from "@mui/icons-material/Menu";
+import MenuOpenIcon from "@mui/icons-material/MenuOpen";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PeopleIcon from "@mui/icons-material/People";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { useNavigate, useLocation } from "react-router-dom";
+import { CalendarIcon } from "@mui/x-date-pickers";
 
-const Sidebar = ({ isCollapsed }) => {
+const Sidebar = ({ isCollapsed, onToggleSidebar }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const theme = useTheme();
@@ -22,6 +26,8 @@ const Sidebar = ({ isCollapsed }) => {
   const menuItems = [
     { label: "Dashboard", icon: <DashboardIcon />, path: "/dashboard" },
     { label: "Patients", icon: <PeopleIcon />, path: "/dashboard/patientsList" },
+    { label: "Staffs", icon: <PeopleIcon />, path: "/dashboard/staffListing" },
+    { label: "Appointment", icon: <CalendarIcon />, path: "/dashboard/appointment" },
     { label: "Settings", icon: <SettingsIcon />, path: "/dashboard/settings" },
   ];
 
@@ -32,23 +38,25 @@ const Sidebar = ({ isCollapsed }) => {
         display: "flex",
         flexDirection: "column",
         alignItems: isCollapsed ? "center" : "flex-start",
+        width: isCollapsed ? "64px" : "250px",
+        transition: "width 0.3s ease",
+        p:1
       }}
     >
-      {/* Logo */}
+      {/* Logo + Sidebar Toggle */}
       <Box
         sx={{
           height: "64px",
           display: "flex",
           alignItems: "center",
-
-          justifyContent: isCollapsed ? "center" : "start",
+          justifyContent: isCollapsed ? "center" : "space-between",
           px: 2,
           width: "100%",
           borderBottom: "1px solid rgba(99, 98, 98, 0.4)",
           color: theme.palette.primary.main,
         }}
       >
-        {!isCollapsed && <img src="/logo-bg.png" width="50px" alt="logo" />}{" "}
+        {!isCollapsed && <img src="/logo-bg.png" width="50px" alt="logo" />}
         {!isCollapsed && (
           <Typography variant="h5" fontWeight={600} ml={2}>
             Medify
@@ -59,6 +67,11 @@ const Sidebar = ({ isCollapsed }) => {
             M
           </Typography>
         )}
+
+        {/* Toggle Button */}
+        <IconButton onClick={onToggleSidebar} size="small"  sx={{ color: theme.palette.primary.main }}>
+          {isCollapsed ? <MenuIcon /> : <MenuOpenIcon />}
+        </IconButton>
       </Box>
 
       {/* Menu List */}
@@ -77,12 +90,8 @@ const Sidebar = ({ isCollapsed }) => {
                 sx={{
                   px: isCollapsed ? 0 : 3,
                   justifyContent: isCollapsed ? "center" : "flex-start",
-                  bgcolor: isActive
-                    ? theme.palette.primary.main
-                    : "transparent",
-                  "&:hover": {
-                    bgcolor: theme.palette.action.hover,
-                  },
+                  bgcolor: isActive ? theme.palette.primary.main : "transparent",
+                  "&:hover": { bgcolor: theme.palette.action.hover },
                   transition: "all 0.3s ease",
                   borderRadius: theme.shape.borderRadius,
                   mx: 1,

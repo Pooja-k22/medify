@@ -21,7 +21,7 @@ function DashBoardLayout() {
 
   return (
    <>
-      <Box sx={{ display: "flex" }}>
+      <Box sx={{ display: "flex" }} bgcolor={'background.paper'}>
         {/* Sidebar on large screen */}
         {!isMobile && (
           <Box
@@ -31,7 +31,7 @@ function DashBoardLayout() {
               flexShrink: 0,
               position: "fixed",
               height: "100vh",
-              bgcolor: "background.paper",
+              bgcolor: "background.default",
               color: "text.primary",
               transition: "width 0.3s ease",
               borderRadius: 2,
@@ -39,70 +39,78 @@ function DashBoardLayout() {
               m: 2,
             }}
           >
-            <Sidebar isCollapsed={isCollapsed} />
+            <Sidebar isCollapsed={isCollapsed} onToggleSidebar={handleToggleSidebar} />
           </Box>
         )}
   
         {/* Main Content Area */}
-        <Box
-          sx={{
-            flexGrow: 1,
-            ml: !isMobile
-              ? isCollapsed
-                ? `${collapsedWidth}px `
-                : `${drawerWidth}px`
-              : 0,
-            display: "flex",
-            flexDirection: "column",
-            height: "100vh",
-            p:1,
-          }}
-        >
-          {/* Header */}
+       
           <Box
-            sx={{
-              //width:'100%',
-              width: !isMobile
-        ? `calc(100% - ${isCollapsed ? collapsedWidth + extraSpace : drawerWidth + extraSpace}px)`
-        : "100%",
-              position: "fixed",
-              top: 0,
-              left: !isMobile
-                ? isCollapsed
-                  ? `${collapsedWidth + extraSpace}px`
-                  : `${drawerWidth + extraSpace}px`
-                : 0,
-                //right:3,
-              height: "64px",
-              // bgcolor: "background.paper",
-              //boxShadow: "0px 2px 4px rgba(0,0,0,0.1)",
-              zIndex: 1100,
-              // p: 2,
-              py:{md:2},
-              //borderRadius: 2,
-            }}
-          >
-            <Header onToggleSidebar={handleToggleSidebar} />
-          </Box>
-  
-          {/*  Content */}
-          <Box
-            component="main"
             sx={{
               flexGrow: 1,
-              pl:{md: 3},
-              mt: 12,
-              //overflowY: "auto",
-              bgcolor: "background.default",
+              ml: !isMobile
+                ? isCollapsed
+                  ? `${collapsedWidth}px `
+                  : `${drawerWidth}px`
+                : 0,
+              display: "flex",
+              flexDirection: "column",
+              height: "100vh",
+              p:1,
+              
+              overflowX:'hidden'
+              
             }}
           >
-            <Outlet />
-          </Box>
+            {/* Header */}
+            <Box
+              sx={{
+                //width:'100%',
+                width: !isMobile
+          ? `calc(100% - ${isCollapsed ? collapsedWidth + extraSpace : drawerWidth + extraSpace}px)`
+          : "100%",
+                position: "fixed",
+                top: 0,
+                left: !isMobile
+                  ? isCollapsed
+                    ? `${collapsedWidth + extraSpace}px`
+                    : `${drawerWidth + extraSpace}px`
+                  : 0,
+                  //right:3,
+                height: "64px",
+                // bgcolor: "background.paper",
+                //boxShadow: "0px 2px 4px rgba(0,0,0,0.1)",
+                zIndex: 1100,
+                // p: 2,
+                py:{md:2},
+                //borderRadius: 2,
+              }}
+            >
+              <Header onToggleSidebar={handleToggleSidebar} />
+            </Box>
+    
+            {/*  Content */}
+            <Box
+              component="main"
+              sx={{
+                flexGrow: 1,
+                //pl:{md: 3},
+                mx:{md:3},
+                mt: 12,
+                width:'100%',
+                 maxWidth: "100%",
+                overflowY: "auto",
+                bgcolor: "background.default",
+              }}
+            >
+              <Outlet />
+            </Box>
+            
+    
+            <HeaderDrawer />
+         
           
-  
-          <HeaderDrawer />
-        </Box>
-        
+       </Box>
       </Box>
   
       {/* sidebar on mobile */}

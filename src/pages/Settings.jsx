@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -9,6 +9,7 @@ import {
   Stack,
   TextField,
   Divider,
+  useTheme,
 } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
 import * as yup from "yup";
@@ -22,26 +23,28 @@ const schema = yup.object().shape({
     .mixed()
     .required("Please select an image")
     .test("fileType", "Only JPG, JPEG, PNG files are allowed", (value) => {
-      if (!value) return false; // required
+      if (!value) return false; 
       return ["image/jpeg", "image/jpg", "image/png"].includes(value.type);
     }),
 });
 
 export default function Settings() {
+  const theme = useTheme();
   const { showToast } = useToast();
   const [preview, setPreview] = useState(null);
   const {
     control,
     handleSubmit,
     watch,
-    formState: { errors },
+    setValue,
+        formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
   });
 
   const selectedFile = watch("image");
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (selectedFile) {
       const reader = new FileReader();
       reader.onloadend = () => setPreview(reader.result);
@@ -62,7 +65,7 @@ export default function Settings() {
     <Box
       sx={{
         //p: 2,
-        bgcolor: "var(--bg-color)",
+        bgcolor:theme.palette.background.paper ,
         minHeight: "100vh",
       }}
     >
@@ -71,6 +74,7 @@ export default function Settings() {
           width: "full",
           borderRadius: 2,
           boxShadow: "0 4px 16px rgba(0,0,0,0.1)",
+          bgcolor:theme.palette.background.default
         }}
       >
         <CardContent>
@@ -106,6 +110,8 @@ export default function Settings() {
                     hidden
                     accept="image/png, image/jpeg, image/jpg"
                     onChange={(e) => field.onChange(e.target.files[0])}
+                  // onChange={(e) => setValue("image", e.target.files[0], { shouldValidate: true })}
+
                   />
                 </Button>
               )}

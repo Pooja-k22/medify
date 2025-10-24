@@ -53,6 +53,7 @@ export default function AddressInfoCard({id}) {
           p: 3,
           borderRadius: 3,
           boxShadow: "0 2px 8px rgba(0,0,0,0.05)",
+           bgcolor: theme.palette.background.default,
         }}
       >
         <Box

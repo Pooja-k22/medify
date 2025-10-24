@@ -4,6 +4,7 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 import PeopleIcon from "@mui/icons-material/People";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { useNavigate, useLocation } from "react-router-dom";
+import { CalendarIcon } from "@mui/x-date-pickers";
 
 const BottomNavBar = () => {
   const [value, setValue] = useState(0);
@@ -35,19 +36,31 @@ const BottomNavBar = () => {
       >
         <BottomNavigationAction
           label="Dashboard"
-          value="/"
+          value="/dashboard"
           icon={<DashboardIcon />}
           sx={{ color: "#fff" }}
         />
         <BottomNavigationAction
           label="Patients"
-          value="/patientsList"
+          value="/dashboard/patientsList"
           icon={<PeopleIcon />}
+          sx={{ color: "#fff" }}
+        />
+         <BottomNavigationAction
+          label="Patients"
+          value="/dashboard/staffListing"
+          icon={<PeopleIcon />}
+          sx={{ color: "#fff" }}
+        />
+         <BottomNavigationAction
+          label="Patients"
+          value="/dashboard/appointment"
+          icon={<CalendarIcon />}
           sx={{ color: "#fff" }}
         />
         <BottomNavigationAction
           label="Settings"
-          value="/settings"
+          value="/dashboard/settings"
           icon={<SettingsIcon />}
           sx={{ color: "#fff" }}
         />
